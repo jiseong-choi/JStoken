@@ -1,0 +1,1108 @@
+{
+    "contractName": "KIP7Pausable",
+    "abi": [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "spender",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Approval",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "Paused",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "PauserAdded",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "PauserRemoved",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Transfer",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "Unpaused",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "addPauser",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "spender",
+                    "type": "address"
+                }
+            ],
+            "name": "allowance",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "spender",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "approve",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "balanceOf",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "isPauser",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "pause",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "paused",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "renounceOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "renouncePauser",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "safeTransfer",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "data",
+                    "type": "bytes"
+                }
+            ],
+            "name": "safeTransfer",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "safeTransferFrom",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "data",
+                    "type": "bytes"
+                }
+            ],
+            "name": "safeTransferFrom",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes4",
+                    "name": "interfaceId",
+                    "type": "bytes4"
+                }
+            ],
+            "name": "supportsInterface",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "totalSupply",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transfer",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transferFrom",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "transferOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "unpause",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"PauserAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"PauserRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"addPauser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isPauser\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renouncePauser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"safeTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"KIP7 modified with pausable transfers. See http://kips.klaytn.com/KIPs/kip-7-fungible_token\",\"kind\":\"dev\",\"methods\":{\"allowance(address,address)\":{\"details\":\"See `IKIP7.allowance`.\"},\"approve(address,uint256)\":{\"details\":\"See `IKIP7.approve`. Requirements: - `spender` cannot be the zero address.\"},\"balanceOf(address)\":{\"details\":\"See `IKIP7.balanceOf`.\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"pause()\":{\"details\":\"Called by a pauser to pause, triggers stopped state.\"},\"paused()\":{\"details\":\"Returns true if the contract is paused, and false otherwise.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"safeTransfer(address,uint256)\":{\"details\":\"Moves `amount` tokens from the caller's account to `recipient`.\"},\"safeTransfer(address,uint256,bytes)\":{\"details\":\"Moves `amount` tokens from the caller's account to `recipient`.\"},\"safeTransferFrom(address,address,uint256)\":{\"details\":\"Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance.\"},\"safeTransferFrom(address,address,uint256,bytes)\":{\"details\":\"Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance.\"},\"supportsInterface(bytes4)\":{\"details\":\"See `IKIP13.supportsInterface`. Time complexity O(1), guaranteed to always use less than 30 000 gas.\"},\"totalSupply()\":{\"details\":\"See `IKIP7.totalSupply`.\"},\"transfer(address,uint256)\":{\"details\":\"See `IKIP7.transfer`. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.\"},\"transferFrom(address,address,uint256)\":{\"details\":\"See `IKIP7.transferFrom`. Emits an `Approval` event indicating the updated allowance. This is not required by the KIP. See the note at the beginning of `KIP7`; Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `value`. - the caller must have allowance for `sender`'s tokens of at least `amount`.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"unpause()\":{\"details\":\"Called by a pauser to unpause, returns to normal state.\"}},\"title\":\"Pausable token\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/blluv/klaytn-contracts/contracts/KIP7/extensions/KIP7Pausable.sol\":\"KIP7Pausable\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/blluv/klaytn-contracts/contracts/KIP13/IKIP13.sol\":{\"keccak256\":\"0xb9c3af47fb6b1a9dc929f9df6725269c3ebcd7ae527edaac10850825f6e6fcca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eb80a7a4fae858530bf3ddb390fcd6d6c8db6b2118f0ff57ca90f87f99bbe15c\",\"dweb:/ipfs/QmXrhEXADz6bsqTxmffa2rGDCPwVbeXcZdUekVpa93G6VV\"]},\"/Users/blluv/klaytn-contracts/contracts/KIP13/KIP13.sol\":{\"keccak256\":\"0x74b4adfa335766b47f6fce065948b7fd0ae1a304ba4b82d00f32b739b7f4908d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ef7c5b3c4909c9d922e3715ca6b9cc21986785f09b837e7492efaa90587ccce4\",\"dweb:/ipfs/QmUosxD9HMVBzzysxf2LiPnszBw6bdxEd9qaGDaWQSNKfS\"]},\"/Users/blluv/klaytn-contracts/contracts/KIP7/IKIP7.sol\":{\"keccak256\":\"0x286090a011978ededbcf58c4f639f8dbe1472d8c5fc4f94139b3877c53352d54\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://89cdfcd6f87c4d6817c871b1cf752778f5aae249c2bdc0b08e035dce5f5c1352\",\"dweb:/ipfs/QmdBqZ5nuVC48gSEbfVFKNKBzEyGdj19uhU5gV7Mp4mJQd\"]},\"/Users/blluv/klaytn-contracts/contracts/KIP7/IKIP7Receiver.sol\":{\"keccak256\":\"0x4bd15aeffa208eaeb55484aef0b772042c31a57c1efe58e5c8058ba075ebecf4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2281c61c104209d60eefecbb216232dcdb32b2372c885debb8ca3dc38be65538\",\"dweb:/ipfs/QmUUfhoQ4Y4h53A8GovmcVvALG9KFh6vC8Bi3UpcikY115\"]},\"/Users/blluv/klaytn-contracts/contracts/KIP7/KIP7.sol\":{\"keccak256\":\"0xc6e176f2f6bbdad76a477d011025a4bdf1cf24298d5747456a2d791865c195e4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://586648c92106df62ddb8f5650db0a5f646d7f03c7cfd11780fc2a14cb26ea221\",\"dweb:/ipfs/QmVYU8pUPnA7tUib3M71sT2eDdeSEJfkJpZnn36XwPwdWq\"]},\"/Users/blluv/klaytn-contracts/contracts/KIP7/extensions/KIP7Pausable.sol\":{\"keccak256\":\"0x82bec09382dedbde07764239b0fd3dcb60fa3cbca2fcf942c34bbc7e2f9f8760\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://46dce6f32ced05ea747eaaa6f174f8db22070751d4f70c42cc937cb0b5549a87\",\"dweb:/ipfs/QmcC35CqL8xuPSytR6hRdRFoZTBXD5SJZEWhacz2HdgAXk\"]},\"/Users/blluv/klaytn-contracts/contracts/access/Ownable.sol\":{\"keccak256\":\"0xe7a56164d08aeb886a17b1bc8f0ecfcb03f7a10a45895ffbcde69b024d511c2a\",\"urls\":[\"bzz-raw://f7a4fb3437ed8e0807a8326a58ee04aa66bbf9b1ae4835c7db465661c506eb48\",\"dweb:/ipfs/QmVnYXpjd1k91uECofWnuXk1zJDRrz6xZqQSzQA4vePz5d\"]},\"/Users/blluv/klaytn-contracts/contracts/access/Roles.sol\":{\"keccak256\":\"0x566131bd47a19bc42518638c4c6f79b63f75e022fd42ef863b6b7832bb44de89\",\"urls\":[\"bzz-raw://dcce60914099ea1f750e3b0c509b1b57a4a1162cffbeab692dbbca4d8e01829b\",\"dweb:/ipfs/QmNhZsLeEjgTDZQJEr2UcDQC9b6bUcboNUZxwnZSFmzpFF\"]},\"/Users/blluv/klaytn-contracts/contracts/access/roles/PauserRole.sol\":{\"keccak256\":\"0x7759ea88fc5085472aae56a638e1a7247f590e1c50066a1b32a4190a2825e5cf\",\"urls\":[\"bzz-raw://cbe2bda7a3b8589ed8cc6a9c00e5cab2131ebcb93f53b3501eb832d729bc7206\",\"dweb:/ipfs/QmUZ83D6pjkHbCPom9ixHAZUu9ybBLPC8YgMLnEX8DAtn8\"]},\"/Users/blluv/klaytn-contracts/contracts/lifecycle/Pausable.sol\":{\"keccak256\":\"0x24447a6d5f92d607cc42ef94e163ee0c202d98fe50de6d776677894d4428e944\",\"urls\":[\"bzz-raw://9985a204404d7bd77a33b05a421357bcfcace09567c563ad6bd194c87a1d2d5f\",\"dweb:/ipfs/QmZvEcnAhpftbdPm6QigGnFHVqAA7YbxoBKaCbCJtM8w9U\"]},\"/Users/blluv/klaytn-contracts/contracts/utils/Address.sol\":{\"keccak256\":\"0xf595f3dccf05f395685c44a709bb3f72e1e4aada4e669b52de0be208690a942f\",\"urls\":[\"bzz-raw://40fdeb98c86a495c425341304178aa645317b3100197740279f10d8b4643fdbc\",\"dweb:/ipfs/QmNkrUCYZH5D8EcAQRP5qXdrWvafBcdyC4pWbLqP8hzhrd\"]},\"/Users/blluv/klaytn-contracts/contracts/utils/Context.sol\":{\"keccak256\":\"0x2d43dbafeecfd6560ee85b5735b2fef32ebee32ef7c3ede3ddc46edd7fb5a314\",\"urls\":[\"bzz-raw://ad072ce60770664ad4fa11aa6268f8abcf7ef97a19a544176f7f4ee3a12ec6d3\",\"dweb:/ipfs/QmTb7GVfBPB2M5u57oKxHWBczfFjRchUmDfvUkhAR9ho6Y\"]},\"/Users/blluv/klaytn-contracts/contracts/utils/SafeMath.sol\":{\"keccak256\":\"0x35495bb362432ec1ae62753122fc1623078c03ec1cd639be5db96f2335d207e6\",\"urls\":[\"bzz-raw://9fcb0d7fbd98f3b20934bdc392366778a888d5391d7f0a71dc44c72aa05b41b1\",\"dweb:/ipfs/QmRvzMk32Jgyyac1FE9g1WQEkVV454ouQvAdnMDkUdzgtr\"]}},\"version\":1}",
+    "bytecode": "",
+    "deployedBytecode": "",
+    "sourceMap": "",
+    "deployedSourceMap": "",
+    "sourcePath": "/Users/blluv/klaytn-contracts/contracts/KIP7/extensions/KIP7Pausable.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.0+commit.c7dfd78e"
+    },
+    "ast": {
+        "absolutePath": "/Users/blluv/klaytn-contracts/contracts/KIP7/extensions/KIP7Pausable.sol",
+        "exportedSymbols": {
+            "Address": [
+                1227
+            ],
+            "Context": [
+                1249
+            ],
+            "IKIP13": [
+                11
+            ],
+            "IKIP7": [
+                186
+            ],
+            "IKIP7Receiver": [
+                204
+            ],
+            "KIP13": [
+                68
+            ],
+            "KIP7": [
+                762
+            ],
+            "KIP7Pausable": [
+                809
+            ],
+            "Ownable": [
+                914
+            ],
+            "Pausable": [
+                1206
+            ],
+            "PauserRole": [
+                1112
+            ],
+            "Roles": [
+                1003
+            ],
+            "SafeMath": [
+                1445
+            ]
+        },
+        "id": 810,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 764,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "32:23:5"
+            },
+            {
+                "absolutePath": "/Users/blluv/klaytn-contracts/contracts/KIP7/KIP7.sol",
+                "file": "../KIP7.sol",
+                "id": 765,
+                "nodeType": "ImportDirective",
+                "scope": 810,
+                "sourceUnit": 763,
+                "src": "57:21:5",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "absolutePath": "/Users/blluv/klaytn-contracts/contracts/lifecycle/Pausable.sol",
+                "file": "../../lifecycle/Pausable.sol",
+                "id": 766,
+                "nodeType": "ImportDirective",
+                "scope": 810,
+                "sourceUnit": 1207,
+                "src": "79:38:5",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "abstract": true,
+                "baseContracts": [
+                    {
+                        "baseName": {
+                            "id": 768,
+                            "name": "KIP7",
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 762,
+                            "src": "289:4:5"
+                        },
+                        "id": 769,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "289:4:5"
+                    },
+                    {
+                        "baseName": {
+                            "id": 770,
+                            "name": "Pausable",
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 1206,
+                            "src": "295:8:5"
+                        },
+                        "id": 771,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "295:8:5"
+                    }
+                ],
+                "contractDependencies": [
+                    11,
+                    68,
+                    186,
+                    762,
+                    914,
+                    1112,
+                    1206,
+                    1249
+                ],
+                "contractKind": "contract",
+                "documentation": {
+                    "id": 767,
+                    "nodeType": "StructuredDocumentation",
+                    "src": "119:135:5",
+                    "text": " @title Pausable token\n @dev KIP7 modified with pausable transfers.\n See http://kips.klaytn.com/KIPs/kip-7-fungible_token"
+                },
+                "fullyImplemented": true,
+                "id": 809,
+                "linearizedBaseContracts": [
+                    809,
+                    1206,
+                    1112,
+                    914,
+                    1249,
+                    762,
+                    186,
+                    68,
+                    11
+                ],
+                "name": "KIP7Pausable",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": true,
+                        "id": 774,
+                        "mutability": "constant",
+                        "name": "_INTERFACE_ID_KIP7PAUSABLE",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 809,
+                        "src": "793:63:5",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_bytes4",
+                            "typeString": "bytes4"
+                        },
+                        "typeName": {
+                            "id": 772,
+                            "name": "bytes4",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "793:6:5",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_bytes4",
+                                "typeString": "bytes4"
+                            }
+                        },
+                        "value": {
+                            "hexValue": "30783464353530376666",
+                            "id": 773,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "846:10:5",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_rational_1297418239_by_1",
+                                "typeString": "int_const 1297418239"
+                            },
+                            "value": "0x4d5507ff"
+                        },
+                        "visibility": "private"
+                    },
+                    {
+                        "body": {
+                            "id": 781,
+                            "nodeType": "Block",
+                            "src": "879:138:5",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "id": 778,
+                                                "name": "_INTERFACE_ID_KIP7PAUSABLE",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 774,
+                                                "src": "983:26:5",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bytes4",
+                                                    "typeString": "bytes4"
+                                                }
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_bytes4",
+                                                    "typeString": "bytes4"
+                                                }
+                                            ],
+                                            "id": 777,
+                                            "name": "_registerInterface",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 67,
+                                            "src": "964:18:5",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_internal_nonpayable$_t_bytes4_$returns$__$",
+                                                "typeString": "function (bytes4)"
+                                            }
+                                        },
+                                        "id": 779,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "964:46:5",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 780,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "964:46:5"
+                                }
+                            ]
+                        },
+                        "id": 782,
+                        "implemented": true,
+                        "kind": "constructor",
+                        "modifiers": [],
+                        "name": "",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 775,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "875:2:5"
+                        },
+                        "returnParameters": {
+                            "id": 776,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "879:0:5"
+                        },
+                        "scope": 809,
+                        "src": "863:154:5",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "internal"
+                    },
+                    {
+                        "baseFunctions": [
+                            761
+                        ],
+                        "body": {
+                            "id": 807,
+                            "nodeType": "Block",
+                            "src": "1151:144:5",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "id": 795,
+                                                "name": "from",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 784,
+                                                "src": "1188:4:5",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            {
+                                                "id": 796,
+                                                "name": "to",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 786,
+                                                "src": "1194:2:5",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                }
+                                            },
+                                            {
+                                                "id": 797,
+                                                "name": "amount",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 788,
+                                                "src": "1198:6:5",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_uint256",
+                                                    "typeString": "uint256"
+                                                }
+                                            ],
+                                            "expression": {
+                                                "id": 792,
+                                                "name": "super",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 4294967271,
+                                                "src": "1161:5:5",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_type$_t_super$_KIP7Pausable_$809_$",
+                                                    "typeString": "type(contract super KIP7Pausable)"
+                                                }
+                                            },
+                                            "id": 794,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": false,
+                                            "lValueRequested": false,
+                                            "memberName": "_beforeTokenTransfer",
+                                            "nodeType": "MemberAccess",
+                                            "referencedDeclaration": 761,
+                                            "src": "1161:26:5",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                                                "typeString": "function (address,address,uint256)"
+                                            }
+                                        },
+                                        "id": 798,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "1161:44:5",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 799,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "1161:44:5"
+                                },
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "id": 803,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "nodeType": "UnaryOperation",
+                                                "operator": "!",
+                                                "prefix": true,
+                                                "src": "1232:9:5",
+                                                "subExpression": {
+                                                    "arguments": [],
+                                                    "expression": {
+                                                        "argumentTypes": [],
+                                                        "id": 801,
+                                                        "name": "paused",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 1148,
+                                                        "src": "1233:6:5",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
+                                                            "typeString": "function () view returns (bool)"
+                                                        }
+                                                    },
+                                                    "id": 802,
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": false,
+                                                    "kind": "functionCall",
+                                                    "lValueRequested": false,
+                                                    "names": [],
+                                                    "nodeType": "FunctionCall",
+                                                    "src": "1233:8:5",
+                                                    "tryCall": false,
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_bool",
+                                                        "typeString": "bool"
+                                                    }
+                                                },
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            {
+                                                "hexValue": "45524332305061757361626c653a20746f6b656e207472616e73666572207768696c6520706175736564",
+                                                "id": 804,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "string",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "1243:44:5",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_stringliteral_fcb1fc9f3615fd38ab90d28b50a608758c295eeacbd5840421a4ee3b0df2f1f4",
+                                                    "typeString": "literal_string \"ERC20Pausable: token transfer while paused\""
+                                                },
+                                                "value": "ERC20Pausable: token transfer while paused"
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_stringliteral_fcb1fc9f3615fd38ab90d28b50a608758c295eeacbd5840421a4ee3b0df2f1f4",
+                                                    "typeString": "literal_string \"ERC20Pausable: token transfer while paused\""
+                                                }
+                                            ],
+                                            "id": 800,
+                                            "name": "require",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [
+                                                4294967278,
+                                                4294967278
+                                            ],
+                                            "referencedDeclaration": 4294967278,
+                                            "src": "1224:7:5",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                                                "typeString": "function (bool,string memory) pure"
+                                            }
+                                        },
+                                        "id": 805,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "1224:64:5",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 806,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "1224:64:5"
+                                }
+                            ]
+                        },
+                        "id": 808,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "_beforeTokenTransfer",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": {
+                            "id": 790,
+                            "nodeType": "OverrideSpecifier",
+                            "overrides": [],
+                            "src": "1142:8:5"
+                        },
+                        "parameters": {
+                            "id": 789,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 784,
+                                    "mutability": "mutable",
+                                    "name": "from",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 808,
+                                    "src": "1062:12:5",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 783,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1062:7:5",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 786,
+                                    "mutability": "mutable",
+                                    "name": "to",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 808,
+                                    "src": "1084:10:5",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 785,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1084:7:5",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 788,
+                                    "mutability": "mutable",
+                                    "name": "amount",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 808,
+                                    "src": "1104:14:5",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 787,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1104:7:5",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1052:72:5"
+                        },
+                        "returnParameters": {
+                            "id": 791,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "1151:0:5"
+                        },
+                        "scope": 809,
+                        "src": "1023:272:5",
+                        "stateMutability": "nonpayable",
+                        "virtual": true,
+                        "visibility": "internal"
+                    }
+                ],
+                "scope": 810,
+                "src": "255:1042:5"
+            }
+        ],
+        "src": "32:1265:5"
+    },
+    "functionHashes": {
+        "addPauser(address)": "82dc1ec4",
+        "allowance(address,address)": "dd62ed3e",
+        "approve(address,uint256)": "095ea7b3",
+        "balanceOf(address)": "70a08231",
+        "isPauser(address)": "46fbf68e",
+        "owner()": "8da5cb5b",
+        "pause()": "8456cb59",
+        "paused()": "5c975abb",
+        "renounceOwnership()": "715018a6",
+        "renouncePauser()": "6ef8d66d",
+        "safeTransfer(address,uint256)": "423f6cef",
+        "safeTransfer(address,uint256,bytes)": "eb795549",
+        "safeTransferFrom(address,address,uint256)": "42842e0e",
+        "safeTransferFrom(address,address,uint256,bytes)": "b88d4fde",
+        "supportsInterface(bytes4)": "01ffc9a7",
+        "totalSupply()": "18160ddd",
+        "transfer(address,uint256)": "a9059cbb",
+        "transferFrom(address,address,uint256)": "23b872dd",
+        "transferOwnership(address)": "f2fde38b",
+        "unpause()": "3f4ba83a"
+    },
+    "gasEstimates": null
+}
